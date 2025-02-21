@@ -3,7 +3,7 @@ import io
 from werkzeug.utils import secure_filename
 import os
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "second-hexagon-451608-n5-baea8e998b07.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "credentials.json"
 from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
