@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>DEMO OCR</title>
+</head>
+
+<body>
+  <h1>Upload Image for OCR</h1>
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <input type="submit" value="Upload">
+  </form>
+  {% if image_url %}
+  <h2>Uploaded Image</h2>
+  <img src="{{ image_url }}" alt="Uploaded Image" width="400">
+
+  {% endif %}
+
+  {% if extracted_text %}
+  <h2>Extracted Text</h2>
+  <p>{{ extracted_text }}</p>
+  {% endif %}
+</body>
+<html>
