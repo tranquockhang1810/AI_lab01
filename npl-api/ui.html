@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sentiment Analysis</title>
+</head>
+<body>
+  <h2>Nhập đánh giá của bạn:</h2>
+  <textarea id="inputText" rows="4" cols="50"></textarea><br>
+  <button onClick="analyzeSentiment()">Phân tích</button>
+  <p>Kết quả: <span id="result"></span></p>
+
+  <h2>Dịch văn bản:</h2>
+  <textarea id="inputTextTranslate" rows="4" cols="50" placeholder="Nhập văn bản tiếng Anh..."></textarea><br>
+  <button onClick="translateText()">Dịch</button>
+  <p>Bản dịch: <span id="transResult"></span></p>
+
+  <script>
+    async function analyzeSentiment() {
+      const text = document.getElementById('inputText').value;
+      const response = await fetch('http://localhost:5000/analyze', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ text })
+      });
+      const data = await response.json();
+      document.getElementById('result').innerText = JSON.stringify(data);
+    }
+
+    async function translateText() {
+      const text = document.getElementById('inputTextTranslate').value;
+      const response = await fetch('http://localhost:5000/translate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ text })
+      });
+      const data = await response.json();
+      document.getElementById('transResult').innerText = data[0]?.translation_text || "Lỗi dịch văn bản";
+    }
+  </script>
+</body>
+</html>
